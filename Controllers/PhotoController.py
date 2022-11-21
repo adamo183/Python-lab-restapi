@@ -1,7 +1,6 @@
 from PIL import Image
 import PIL.ImageOps, io
 from fastapi import APIRouter, File, Form, UploadFile
-from fastapi.openapi.models import Response
 from fastapi.responses import StreamingResponse
 
 controllerName = "photo"
