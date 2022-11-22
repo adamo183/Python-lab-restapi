@@ -24,27 +24,6 @@ users.append(User('users', 'pass'))
 
 key = '1EU1jBxj8nKfvCaAzdeq1yafPEGrimcg8k'
 
-
-def token_required(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        token = None
-        if 'x-access-token' in f.headers:
-            token = f.headers['x-access-token']
-        if not token:
-            return {'message': 'Token is missing !!'}, 401
-
-        try:
-            data = jwt.decode(token, options={"verify_signature": False})
-        except:
-            return {
-                       'message': 'Token is invalid !!'
-                   }, 401
-        return f()
-
-    return decorated
-
-
 reuseable_oauth = OAuth2PasswordBearer(
     tokenUrl="/login",
     scheme_name="JWT"
